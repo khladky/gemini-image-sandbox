@@ -1,5 +1,66 @@
-DEFAULT STYLE:
-Generate a short, natural Flickr photo title and a three-to-four sentence description.
+# example.txt — example Gemini queries for the Flickr Gemini Sandbox
+#
+# Copy any of these into the query box to try them out.
+
+---
+
+BASIC DESCRIPTION:
+Describe this photo in three to four sentences.
+
+---
+
+TITLE AND DESCRIPTION:
+Generate a short Flickr photo title and a three to four sentence description.
+
+---
+
+SARCASTIC TOUR GUIDE:
+Describe this photo as if narrated by a dry, world-weary tour guide who has seen it all a thousand times and is no longer impressed by anything, but still finds it mildly amusing to comment on.
+
+---
+
+PHOTO CRITIQUE:
+Give a critical analysis of this photo as if written by a demanding art critic. Comment on composition, lighting, subject matter, and overall impact.
+
+---
+
+DRY TECHNICAL:
+Describe this photo as if written by a methodical forensic analyst — precise, factual, and emotionally detached. Note composition, lighting conditions, colour palette, and any technically notable elements.
+
+---
+
+POETIC:
+Write a short poetic description of this photo with rich sensory imagery and a contemplative tone. Favour concrete specific details over abstract emotional statements.
+
+---
+
+FIVE YEAR OLD:
+Describe this photo as a five-year-old child would, using very simple words, lots of excitement, and the occasional charmingly wrong guess about what is happening.
+
+---
+
+IDENTIFY LOCATION:
+Based on any visual clues in this photo, can you identify or make an educated guess about where it was taken? Explain your reasoning.
+
+---
+
+TAG SUGGESTIONS:
+Suggest 15 to 20 Flickr tags for this photo. Reply with only a comma-separated list, all lowercase, multi-word tags hyphenated.
+
+---
+
+IDENTIFY OBJECTS:
+List all the significant objects, people, animals, and landmarks visible in this photo.
+
+---
+
+MOOD AND ATMOSPHERE:
+Describe the mood and atmosphere of this photo. What emotions does it evoke and why?
+
+---
+
+STORY:
+Write a short two to three paragraph fictional story inspired by this photo.
 
 ---
 
@@ -37,8 +98,3 @@ VULGAR :
 Generate a short Flickr photo title and a three-to-four sentence description written in a crude, sweary, irreverent voice — like a foul-mouthed mate describing the scene down the pub.
 
 ---
-
-Feel free to mix and match elements from the above, or write something
-completely different. The only requirement is that it's a single block of
-plain text describing the title/description you want — no special format
-or syntax needed.

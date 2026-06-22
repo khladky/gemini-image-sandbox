@@ -29,6 +29,10 @@ The free tier allows a small number of requests per day. For heavier use, add bi
 
 The photo and the last query you typed are remembered between popup opens. The response is also cached per photo, so reopening the popup on the same photo restores the last result.
 
+## Example queries
+
+An `example.txt` file is included with a range of ready-to-try queries — basic description, title and description, sarcastic tour guide, photo critique, poetic, five-year-old, location identification, tag suggestions, and more. Copy any line from that file into the query box to try it.
+
 ## Notes
 
 - Only works on public photos — private photos cannot be fetched by the extension
