@@ -35,8 +35,13 @@ async function resizeToBase64(url) {
   });
 }
 
-chrome.storage.local.get("geminiApiKey", ({ geminiApiKey }) => {
+chrome.storage.local.get(["geminiApiKey", "geminiModel"], ({ geminiApiKey, geminiModel }) => {
   if (geminiApiKey) $("api-key").value = geminiApiKey;
+  if (geminiModel) $("model-select").value = geminiModel;
+});
+
+$("model-select").addEventListener("change", () => {
+  chrome.storage.local.set({ geminiModel: $("model-select").value });
 });
 
 $("save-key-btn").addEventListener("click", () => {
@@ -95,8 +100,9 @@ $("ask-btn").addEventListener("click", async () => {
   try {
     const base64 = await resizeToBase64(photoUrl);
     setStatus("\u26a1 Waiting for Gemini\u2026");
+    const model = $("model-select").value;
     const result = await chrome.runtime.sendMessage({
-      type: "QUERY", base64, query, apiKey: geminiApiKey
+      type: "QUERY", base64, query, apiKey: geminiApiKey, model
     });
     if (result?.error) {
       setStatus(result.error, "error");
