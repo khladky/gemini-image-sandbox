@@ -204,16 +204,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
   } else if (tab?.url && /\.(jpe?g|png|gif|webp|bmp)(\?.*)?$/i.test(tab.url)) {
-    // Bare image tab
-    dropZone.style.display = "none";
-    $("paste-btn").style.display = "none";
+    // Bare image tab — try to load, fall back to drop zone if it fails
     photoUrl = tab.url;
-    $("photo").src = photoUrl;
-    $("photo").style.display = "block";
-    $("ask-btn").disabled = false;
-    const cached = await chrome.storage.local.get("sandbox:" + photoUrl);
-    const cachedText = cached["sandbox:" + photoUrl];
-    if (cachedText) { showResponse(cachedText); $("copy-btn").style.display = "block"; }
+    await new Promise(resolve => {
+      const img = $("photo");
+      img.onload = () => {
+        dropZone.style.display = "none";
+        $("paste-btn").style.display = "none";
+        img.style.display = "block";
+        $("ask-btn").disabled = false;
+        resolve();
+      };
+      img.onerror = () => {
+        // Image no longer accessible — treat as plain page
+        photoUrl = null;
+        img.src = "";
+        img.style.display = "none";
+        dropZone.style.display = "block";
+        $("paste-btn").style.display = "block";
+        $("ask-btn").disabled = true;
+        setStatus("Image is no longer accessible — drop or paste one above.", "warning");
+        resolve();
+      };
+      img.src = photoUrl;
+    });
+    if (photoUrl) {
+      const cached = await chrome.storage.local.get("sandbox:" + photoUrl);
+      const cachedText = cached["sandbox:" + photoUrl];
+      if (cachedText) { showResponse(cachedText); $("copy-btn").style.display = "block"; }
+    }
 
   } else {
     // Other page — show drop/paste zone, check for cached dropped image
