@@ -77,8 +77,9 @@ async function loadImageBlob(blob) {
     setStatus("");
     showResponse("");
     $("copy-btn").style.display = "none";
-    // Cache the dropped image so it survives popup close
+    // Cache the dropped image and clear any old response
     chrome.storage.local.set({ "sandbox:dropped": droppedBase64 });
+    chrome.storage.local.remove("sandbox:dropped:response");
   } catch (err) {
     setStatus("Failed to load image: " + err.message, "error");
   }
