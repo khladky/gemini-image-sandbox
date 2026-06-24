@@ -77,6 +77,8 @@ async function loadImageBlob(blob) {
     setStatus("");
     showResponse("");
     $("copy-btn").style.display = "none";
+    // Cache the dropped image so it survives popup close
+    chrome.storage.local.set({ "sandbox:dropped": droppedBase64 });
   } catch (err) {
     setStatus("Failed to load image: " + err.message, "error");
   }
@@ -154,12 +156,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       setStatus("Could not load image from tab.", "error");
     }
   } else {
-    // Not on a Flickr page or image tab — show drop zone
+    // Not on a Flickr page or image tab — check for previously cached dropped image
+    const cached = await chrome.storage.local.get(["sandbox:dropped", "sandbox:dropped:response"]);
     dropZone.style.display = "block";
     $("paste-btn").style.display = "block";
-    $("photo").style.display = "none";
-    $("ask-btn").disabled = true;
-    setStatus("Not on a Flickr photo page \u2014 drop or paste an image above to use instead.", "warning");
+    if (cached["sandbox:dropped"]) {
+      droppedBase64 = cached["sandbox:dropped"];
+      $("photo").src = "data:image/jpeg;base64," + droppedBase64;
+      $("photo").style.display = "block";
+      dropZone.textContent = "Previous image restored \u2014 drop or paste another to replace";
+      $("ask-btn").disabled = false;
+      if (cached["sandbox:dropped:response"]) {
+        showResponse(cached["sandbox:dropped:response"]);
+        $("copy-btn").style.display = "block";
+      }
+      setStatus("");
+    } else {
+      $("photo").style.display = "none";
+      $("ask-btn").disabled = true;
+      setStatus("Not on a Flickr photo page \u2014 drop or paste an image above to use instead.", "warning");
+    }
   }
 });
 
@@ -208,7 +224,11 @@ $("ask-btn").addEventListener("click", async () => {
       showResponse(result.text);
       $("copy-btn").style.display = "block";
       setStatus("");
-      if (photoUrl) chrome.storage.local.set({ ["sandbox:" + photoUrl]: result.text });
+      if (photoUrl) {
+        chrome.storage.local.set({ ["sandbox:" + photoUrl]: result.text });
+      } else {
+        chrome.storage.local.set({ "sandbox:dropped:response": result.text });
+      }
     }
   } catch (e) {
     setStatus("Error: " + e.message, "error");
