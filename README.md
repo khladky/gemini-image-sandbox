@@ -1,8 +1,8 @@
-# Flickr Gemini Sandbox
+# Gemini Image Sandbox
 
-A Chrome extension for experimenting with Google Gemini queries against photos. Open any Flickr photo page, drop in an image, or open an image in a new tab — type a query and see exactly what Gemini returns, unfiltered and unformatted.
+A Chrome extension for experimenting with Google Gemini image queries. Works with Flickr photos, images opened in browser tabs, drag-and-drop, or clipboard paste — type any query and see exactly what Gemini returns, unfiltered and unformatted.
 
-Useful for testing prompts before using them in the [Flickr AI Tagger](https://github.com/khladky/flickr-ai-tagger).
+Originally built for testing prompts for the [Flickr AI Tagger](https://github.com/khladky/flickr-ai-tagger), but works with any image from any source.
 
 ## Installing
 

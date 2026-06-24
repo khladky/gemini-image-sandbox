@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Flickr Gemini Sandbox",
+  "name": "Gemini Image Sandbox",
   "version": "1.0.0",
-  "description": "Send custom Gemini queries against Flickr photos",
+  "description": "Experiment with Gemini AI queries against any image",
   "permissions": [
     "activeTab",
     "scripting",
