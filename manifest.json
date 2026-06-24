@@ -3,7 +3,12 @@
   "name": "Flickr Gemini Sandbox",
   "version": "1.0.0",
   "description": "Send custom Gemini queries against Flickr photos",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "clipboardRead"
+  ],
   "host_permissions": [
     "https://www.flickr.com/*",
     "https://live.staticflickr.com/*",
@@ -18,8 +23,12 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.flickr.com/photos/*/*"],
-      "js": ["content.js"]
+      "matches": [
+        "https://www.flickr.com/photos/*/*"
+      ],
+      "js": [
+        "content.js"
+      ]
     }
   ]
 }
